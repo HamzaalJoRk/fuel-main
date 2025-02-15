@@ -49,6 +49,7 @@ Route::get('/users/edit/{id}', 'UserController@edit')->name('users.edit');
 
 Route::resource('roles', RoleController::class);
 Route::resource('users', UserController::class);
+Route::get('user-create',[ UserController::class,'create_user']);
 Route::resource('products', ProductController::class);
 //Route::resource('permissions', PermissionController::class);
 

@@ -1,11 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<x-admin-dash-layout>
     <div class="ml-4 mr-4">
         <form action="{{ route('users.store') }}" method="POST">
             @csrf
-            <!-- Validation Errors -->
             @if ($errors->any())
                 <div class="mb-4">
                     <div class="font-medium text-red-600">
@@ -29,33 +27,32 @@
             </div>
 
 
-            <div class="grid grid-cols-12 gap-3">
                 <div class="col-span-12 mb-3">
-                    <label for="name" class="block text-sm font-medium text-gray-700">Name:</label>
+                    <label for="name" class="label-control">الاسم:</label>
                     <input type="text" id="name" name="name" value="{{ old('name') }}"
-                           class="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                           class="form-control"
                            placeholder="Name" required>
                 </div>
                 <div class="col-span-12 mb-3">
-                    <label for="email" class="block text-sm font-medium text-gray-700">Email:</label>
+                    <label for="email" class="label-control">الايميل:</label>
                     <input type="email" id="email" name="email" value="{{ old('email') }}"
-                           class="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                           class="form-control"
                            placeholder="Email" required>
                 </div>
                 <div class="col-span-12 mb-3">
-                    <label for="password" class="block text-sm font-medium text-gray-700">Password:</label>
+                    <label for="password" class="label-control">كلمة المرور</label>
                     <input type="password" id="password" name="password"
-                           class="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                           class="form-control"
                            placeholder="Password" required>
                 </div>
                 <div class="col-span-12 mb-3">
-                    <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirm Password:</label>
+                    <label for="confirm-password" class="label-control">تأكيد كلمة المرور</label>
                     <input type="password" id="confirm-password" name="password_confirmation"
-                           class="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                           class="form-control"
                            placeholder="Confirm Password" required>
                 </div>
                 <div class="col-span-12 mb-3">
-                    <label for="roles" class="block text-sm font-medium text-gray-700">Roles:</label>
+                    <label for="roles" class="label-control">الصلاحية:</label>
                     @foreach ($allRoles as $roleName => $roleLabel)
                         <label class="inline-flex items-center mt-2">
                             <input type="checkbox" name="roles[]" value="{{ $roleName }}">
@@ -66,14 +63,12 @@
 
                 <div class="col-span-12 mb-3 text-center">
                     <button type="submit"
-                            class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md">
-                        Submit
+                    style="width: 30%;"
+                            class="btn btn-success">
+                        اضافة
                     </button>
                 </div>
-            </div>
         </form>
     </div>
-</x-admin-dash-layout>
-
 
 @endsection

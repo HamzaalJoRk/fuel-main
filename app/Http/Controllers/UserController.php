@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function index(Request $request)
- {
-    $users = User::all(); // or use pagination if there are many users
-    return view('users.index', compact('users'));
-}
+    {
+        $users = User::all(); // or use pagination if there are many users
+        return view('users.index', compact('users'));
+    }
     
 
     public function create()
@@ -24,6 +24,12 @@ class UserController extends Controller
         if (!auth()->user()->can('create-users')) {
             abort(403, 'Unauthorized');
         }
+        $allRoles = Role::pluck('name','name')->all();
+        return view('users.create',compact('allRoles'));
+    }
+
+    public function create_user()
+    {
         $allRoles = Role::pluck('name','name')->all();
         return view('users.create',compact('allRoles'));
     }

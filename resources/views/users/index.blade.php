@@ -2,8 +2,8 @@
 
 @section('content')
 
-<a href="{{ route('users.create') }}" class="btn btn-success">
-    Add User
+<a href="/user-create" class="btn btn-success">
+    اضافة مستخدم
 </a>
 @if(session('success'))
     <div class="mb-4">
