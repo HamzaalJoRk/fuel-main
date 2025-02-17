@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
     <h2>🚗 قائمة السيارات</h2>
     <a href="{{ route('cars.create') }}" class="btn btn-primary mb-3">إضافة سيارة جديدة</a>
     
@@ -40,5 +39,4 @@
             @endforeach
         </tbody>
     </table>
-</div>
 @endsection

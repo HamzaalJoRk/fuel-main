@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
     <h2>🚗 إضافة سيارة جديدة</h2>
 
     <form action="{{ route('cars.store') }}" method="POST">
@@ -9,6 +8,16 @@
         <div class="mb-3">
             <label>اسم السيارة</label>
             <input type="text" name="name" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label>نوع السيارة</label>
+            <!-- <input type="text" name="car_type" class="form-control" required> -->
+            <select name="car_type" class="form-control">
+                <option value="none">عدم التحديد</option>
+                @foreach($brands as $brand)
+                    <option value="{{ $brand->name }}">{{ $brand->name }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="mb-3">
             <label>نوع الوقود</label>
@@ -32,5 +41,4 @@
         </div>
         <button type="submit" class="btn btn-success">إضافة</button>
     </form>
-</div>
 @endsection

@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
     <h2>⛽ قائمة عمليات التعبئة</h2>
     <a href="{{ route('refuelings.create') }}" class="btn btn-primary mb-3">إضافة عملية تعبئة جديدة</a>
 
@@ -31,11 +30,11 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 mt-1">
                 <label for="date">التاريخ:</label>
                 <input type="date" name="date" id="date" class="form-control" value="{{ request('date') }}">
             </div>
-            <div class="col-md-3 align-self-end">
+            <div class="col-md-3 mt-1 align-self-end">
                 <button type="submit" class="btn btn-primary">بحث</button>
                 <a href="{{ route('refuelings.index') }}" class="btn btn-secondary">إعادة تعيين</a>
             </div>
@@ -72,5 +71,4 @@
             @endforeach
         </tbody>
     </table>
-</div>
 @endsection

@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
     <h2>🚖 تفاصيل السائق</h2>
 
     <table class="table">
@@ -20,5 +19,4 @@
     </table>
     
     <a href="{{ route('drivers.index') }}" class="btn btn-secondary">رجوع</a>
-</div>
 @endsection

@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
     <h2>⛽ إضافة عملية تعبئة جديدة</h2>
 
     <!-- عرض رسالة الخطأ -->
@@ -72,6 +71,5 @@
 
         <button type="submit" class="btn btn-success">إضافة</button>
     </form>
-</div>
 @endsection
 

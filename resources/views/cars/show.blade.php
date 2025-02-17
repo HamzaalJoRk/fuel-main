@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
     <h2>🚗 تفاصيل السيارة: {{ $car->name }}</h2>
 
     <!-- عرض تفاصيل السيارة -->
@@ -36,5 +35,4 @@
             </tbody>
         </table>
     @endif
-</div>
 @endsection

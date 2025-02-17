@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
     <h2>✏️ تعديل عملية التعبئة</h2>
 
     <form action="{{ route('refuelings.update', $refueling->id) }}" method="POST">
@@ -37,5 +36,4 @@
         </div>
         <button type="submit" class="btn btn-success">تحديث</button>
     </form>
-</div>
 @endsection

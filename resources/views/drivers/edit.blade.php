@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
     <h2>✏️ تعديل بيانات السائق</h2>
 
     <form action="{{ route('drivers.update', $driver->id) }}" method="POST">
@@ -25,5 +24,4 @@
         </div>
         <button type="submit" class="btn btn-success">تحديث</button>
     </form>
-</div>
 @endsection

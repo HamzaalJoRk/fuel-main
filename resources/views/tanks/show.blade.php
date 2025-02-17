@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
     <h2>🛢️ تفاصيل الخزان</h2>
 
     <table class="table">
@@ -24,5 +23,4 @@
     </table>
     
     <a href="{{ route('tanks.index') }}" class="btn btn-secondary">رجوع</a>
-</div>
 @endsection

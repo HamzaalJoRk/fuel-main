@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
     <h2>🛢️ قائمة الخزانات</h2>
     <a href="{{ route('tanks.create') }}" class="btn btn-primary mb-3">إضافة خزان جديد</a>
 
@@ -36,5 +35,4 @@
             @endforeach
         </tbody>
     </table>
-</div>
 @endsection

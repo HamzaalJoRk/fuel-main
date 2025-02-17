@@ -2,7 +2,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
     <h2>✏️ تعديل بيانات السيارة</h2>
 
     <form action="{{ route('cars.update', $car->id) }}" method="POST">
@@ -34,5 +33,4 @@
         </div>
         <button type="submit" class="btn btn-success">تحديث</button>
     </form>
-</div>
 @endsection

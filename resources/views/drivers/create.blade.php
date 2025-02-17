@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
     <h2>🚖 إضافة سائق جديد</h2>
 
     <form action="{{ route('drivers.store') }}" method="POST">
@@ -40,5 +39,4 @@
         </div>
         <button type="submit" class="btn btn-success">إضافة</button>
     </form>
-</div>
 @endsection

@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
     <h2>📂 قائمة الأقسام</h2>
     <a href="{{ route('sections.create') }}" class="btn btn-primary mb-3">إضافة قسم جديد</a>
 
@@ -10,7 +9,7 @@
             <tr>
                 <th>#</th>
                 <th>اسم القسم</th>
-                <th>مدير القسم</th>
+                <!-- <th>مدير القسم</th> -->
                 <th>الإجراءات</th>
             </tr>
         </thead>
@@ -19,7 +18,7 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $section->name }}</td>
-                <td>{{ $section->manager }}</td>
+                <!-- <td>{{ $section->manager }}</td> -->
                 <td>
                     <a href="{{ route('sections.show', $section->id) }}" class="btn btn-info btn-sm">عرض</a>
                     <a href="{{ route('sections.edit', $section->id) }}" class="btn btn-warning btn-sm">تعديل</a>
@@ -32,5 +31,4 @@
             @endforeach
         </tbody>
     </table>
-</div>
 @endsection

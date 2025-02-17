@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\CarBrand;
 use App\Models\Section;
 use Illuminate\Http\Request;
 
@@ -27,8 +28,9 @@ class CarController extends Controller
 
     public function create()
     {
+        $brands = CarBrand::all();
         $sections = Section::all();
-        return view('cars.create',compact('sections'));
+        return view('cars.create',compact('sections','brands'));
     }
 
     public function store(Request $request)

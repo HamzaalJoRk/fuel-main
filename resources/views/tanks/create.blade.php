@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
     <h2>🛢️ إضافة خزان جديد</h2>
 
     <form action="{{ route('tanks.store') }}" method="POST">
@@ -24,5 +23,4 @@
         </div>
         <button type="submit" class="btn btn-success">إضافة</button>
     </form>
-</div>
 @endsection

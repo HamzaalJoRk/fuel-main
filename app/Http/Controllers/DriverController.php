@@ -11,8 +11,10 @@ class DriverController extends Controller
 {
     public function index()
     {
+        $sections = Section::all();
+        $cars = Car::all();
         $drivers = Driver::all();
-        return view('drivers.index', compact('drivers'));
+        return view('drivers.index', compact('drivers','cars','sections'));
     }
     
     public function create()
@@ -52,17 +54,23 @@ class DriverController extends Controller
     public function update(Request $request, Driver $driver)
     {
         $request->validate([
-            'car_id' => 'required|exists:cars,id',
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:255',
             'section_id' => 'required|exists:sections,id',
-            'name' => 'required|string',
-            'surname' => 'required|string',
-            'father_name' => 'required|string',
-            'department' => 'required|string',
         ]);
-
-        $driver->update($request->all());
-        return redirect()->route('drivers.index')->with('success', 'تم تحديث بيانات السائق');
+    
+        $driver->update([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'section_id' => $request->section_id,
+        ]);
+    
+        return response()->json([
+            'message' => 'تم تحديث السائق بنجاح',
+            'section_name' => $driver->section->name
+        ]);
     }
+    
 
     public function destroy(Driver $driver)
     {

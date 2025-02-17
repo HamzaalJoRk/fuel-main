@@ -22,7 +22,6 @@ class SectionController extends Controller
     {
         $request->validate([
             'name' => 'required|string|unique:sections,name',
-            'manager' => 'required|string',
         ]);
 
         Section::create($request->all());
