@@ -49,6 +49,11 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/style-rtl.css') }}">
     <!-- END: Custom CSS-->
 <style>
+    .navigation-main .nav-item a {
+    font-family: 'Cairo', sans-serif !important;
+}
+
+
     body {
     font-family: 'Cairo', sans-serif;
 }
@@ -69,7 +74,7 @@
                 </ul>
                 <ul class="nav navbar-nav">
                     <li class="nav-item d-none d-lg-block"><a class="nav-link bookmark-star"></a>
-                        <h2 style="font-weight: bold;">كازية معبر نصيب </h2>
+                        <h2 style="font-weight: bold;font-family: 'Cairo', sans-serif;">كازية معبر نصيب </h2>
                     </li>
                 </ul>
             </div>
@@ -118,21 +123,22 @@
         </div>
         <div class="shadow-bottom"></div>
         <div class="main-menu-content">
-            <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('refuelings.index') }}"><i class="fa-solid fa-gas-pump"></i><span class="menu-title text-truncate" data-i18n="Table">تعبئة الوقود</span></a>
-                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('drivers.index') }}"><i class="fa-solid fa-id-card"></i><span class="menu-title text-truncate" data-i18n="Form Wizard">السائقين</span></a>
+            <ul class="navigation navigation-main">
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('refuelings.index') }}"><i class="fa-solid fa-gas-pump"></i><span class="">تعبئة الوقود</span></a>
                 </li>
-                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('sections.index') }}"><i class="fa-solid fa-bars-progress"></i><span class="menu-title text-truncate" data-i18n="Form Validation">الأقسام</span></a>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('drivers.index') }}"><i class="fa-solid fa-id-card"></i><span class="">السائقين</span></a>
                 </li>
-                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('car_brands.index') }}"><i class="fa-solid fa-car"></i><span class="menu-title text-truncate" data-i18n="Form Layout">ماركات السيارات</span></a>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('sections.index') }}"><i class="fa-solid fa-bars-progress"></i><span class="menu-title text-truncate" >الأقسام</span></a>
                 </li>
-                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('cars.index') }}"><i class="fa-solid fa-car-side"></i><span class="menu-title text-truncate" data-i18n="Form Layout">السيارات</span></a>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('car_brands.index') }}"><i class="fa-solid fa-car"></i><span class="menu-title text-truncate" >ماركات السيارات</span></a>
                 </li>
-                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('tanks.index') }}"><i class="fa-solid fa-mound"></i><span class="menu-title text-truncate" data-i18n="Form Repeater">الخزانات</span></a>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('cars.index') }}"><i class="fa-solid fa-car-side"></i><span class="menu-title text-truncate" >السيارات</span></a>
                 </li>
-                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('users.index') }}"><i class="fa-solid fa-user-group"></i><span class="menu-title text-truncate" data-i18n="Form Repeater">المستخدمين</span></a>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('tanks.index') }}"><i class="fa-solid fa-mound"></i><span class="menu-title text-truncate" >الخزانات</span></a>
                 </li>
-                <li class="nav-item"><a class="d-flex align-items-center" href="/roles"><i class="fa-solid fa-circle-minus"></i><span class="menu-title text-truncate" data-i18n="Form Repeater">الصلاحيات</span></a>
+                <li class="nav-item"><a class="d-flex align-items-center" href="{{ route('users.index') }}"><i class="fa-solid fa-user-group"></i><span class="menu-title text-truncate" >المستخدمين</span></a>
+                </li>
+                <li class="nav-item"><a class="d-flex align-items-center" href="/roles"><i class="fa-solid fa-circle-minus"></i><span class="menu-title text-truncate" >الصلاحيات</span></a>
                 </li>
             </ul>
         </div>
@@ -206,7 +212,6 @@
         });
     });
 </script>
-سفغ
 </body>
 <!-- END: Body-->
 
