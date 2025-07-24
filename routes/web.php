@@ -104,6 +104,10 @@ Route::middleware(['auth']) // Implement admin middleware to restrict access
     Route::put('tanks/{tank}', [TankController::class, 'update'])->name('tanks.update');
     Route::delete('tanks/{tank}', [TankController::class, 'destroy'])->name('tanks.destroy');
 
+    Route::get('/tanks/{tank}/calculate', [TankController::class, 'showCalculateForm'])->name('tanks.calculate');
+    Route::post('/tanks/{tank}/calculate', [TankController::class, 'calculateRemaining']);
+
+
     Route::get('car_brands', [CarBrandController::class, 'index'])->name('car_brands.index'); // عرض جميع العلامات
     Route::get('car_brands-create', [CarBrandController::class, 'create'])->name('car_brands.create'); // صفحة الإضافة
     Route::post('car_brands', [CarBrandController::class, 'store'])->name('car_brands.store'); // حفظ العلامة الجديدة

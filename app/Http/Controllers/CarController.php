@@ -11,15 +11,7 @@ class CarController extends Controller
 {
     public function index()
     {
-        // جلب جميع السيارات
         $cars = Car::all();
-    
-        // حساب المستحقات المتبقية لكل سيارة بناءً على الكمية المعبأة
-        foreach ($cars as $car) {
-            // افتراض وجود عمليات تعبئة للسيارة
-            $filledQuantity = $car->refuelings()->sum('filled_quantity'); // جمع الكميات المعبأة
-            $car->remaining_allowance = $car->monthly_allowance - $filledQuantity; // خصم الكمية المعبأة من المخصص الشهري
-        }
     
         $sections = Section::all();
         return view('cars.index', compact('cars', 'sections'));
@@ -35,7 +27,7 @@ class CarController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([ 
+        $request->validate([
             'name' => 'required|string',
             'fuel_type' => 'required|string',
             'monthly_allowance' => 'required|numeric',
@@ -43,7 +35,15 @@ class CarController extends Controller
             'plate_number' => 'required|string|unique:cars,plate_number',
         ]);
 
-        Car::create($request->all());
+        Car::create([
+            'name' => $request->name,
+            'fuel_type' => $request->fuel_type,
+            'monthly_allowance' => $request->monthly_allowance,
+            'section_id' => $request->section_id,
+            'restDues' => $request->monthly_allowance,
+            'car_type' => $request->car_type,
+            'plate_number' => $request->plate_number,
+        ]);
         return redirect()->route('cars.index')->with('success', 'تمت إضافة السيارة بنجاح');
     }
 

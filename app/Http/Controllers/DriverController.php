@@ -63,12 +63,16 @@ class DriverController extends Controller
             'name' => $request->name,
             'phone' => $request->phone,
             'section_id' => $request->section_id,
+            'car_id' => $request->car_id,
+            'surname' => $request->surname, 
+            'father_name' => $request->father_name
         ]);
-    
-        return response()->json([
-            'message' => 'تم تحديث السائق بنجاح',
-            'section_name' => $driver->section->name
-        ]);
+
+        return redirect()->route('drivers.index')->with('success', 'تم تحديث بيانات السائق');
+        // return response()->json([
+        //     'message' => 'تم تحديث السائق بنجاح',
+        //     'section_name' => $driver->section->name
+        // ]);
     }
     
 

@@ -42,7 +42,6 @@ class SectionController extends Controller
     {
         $request->validate([
             'name' => 'required|string|unique:sections,name,'.$section->id,
-            'manager' => 'required|string',
         ]);
 
         $section->update($request->all());

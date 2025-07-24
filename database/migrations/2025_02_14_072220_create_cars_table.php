@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('fuel_type');
             $table->string('car_type');
+            $table->decimal('restDues', 8, 2);
             $table->decimal('monthly_allowance', 8, 2);
             $table->string('plate_number');
             $table->timestamps();

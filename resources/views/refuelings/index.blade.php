@@ -1,11 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2>⛽ قائمة عمليات التعبئة</h2>
-    <a href="{{ route('refuelings.create') }}" class="btn btn-primary mb-3">إضافة عملية تعبئة جديدة</a>
+    <h2 class="mb-1">⛽ قائمة عمليات التعبئة</h2>
+    @can('اضافة تعبئة وقود')
+        @if($tanks->where('remaining_quantity', '>', 0)->isNotEmpty())
+            @if(!$cars->isEmpty())
+                <a href="{{ route('refuelings.create') }}" class="btn btn-primary mb-1">إضافة عملية تعبئة جديدة</a>
+            @else
+                <div class="alert alert-warning mt-3">
+                    ⚠️ لا يوجد سيارات، لا يمكن إضافة تعبئة جديدة.
+                </div>
+            @endif
+        @else
+            <div class="alert alert-warning mt-3">
+                ⚠️ لا يوجد خزانات متاحة أو جميع الخزانات فارغة، لا يمكن إضافة تعبئة جديدة.
+            </div>
+        @endif
+    @endcan
 
-    
-        <!-- نموذج الفلترة -->
     <form method="GET" action="{{ route('refuelings.index') }}" class="mb-4">
         <div class="row">
             <div class="col-md-3">
@@ -30,7 +42,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-md-3 mt-1">
+            <div class="col-md-3">
                 <label for="date">التاريخ:</label>
                 <input type="date" name="date" id="date" class="form-control" value="{{ request('date') }}">
             </div>
@@ -53,22 +65,26 @@
         </thead>
         <tbody>
             @foreach ($refuelings as $refueling)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $refueling->car->name }}</td>
-                <td>{{ $refueling->tank->name }}</td>
-                <td>{{ $refueling->filled_quantity }}</td>
-                <td>{{ $refueling->date }}</td>
-                <td>
-                    <a href="{{ route('refuelings.show', $refueling->id) }}" class="btn btn-info btn-sm">عرض</a>
-                    <a href="{{ route('refuelings.edit', $refueling->id) }}" class="btn btn-warning btn-sm">تعديل</a>
-                    <form action="{{ route('refuelings.destroy', $refueling->id) }}" method="POST" style="display:inline;">
-                        @csrf @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('هل أنت متأكد من الحذف؟')">حذف</button>
-                    </form>
-                </td>
-            </tr>
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $refueling->car->name }}</td>
+                    <td>{{ $refueling->tank->name }}</td>
+                    <td>{{ $refueling->filled_quantity }}</td>
+                    <td>{{ $refueling->date }}</td>
+                    <td>
+                        <a href="{{ route('refuelings.edit', $refueling->id) }}" class="btn btn-warning btn-sm">تعديل</a>
+                        <form action="{{ route('refuelings.destroy', $refueling->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm"
+                                onclick="return confirm('هل أنت متأكد من الحذف؟')">حذف</button>
+                        </form>
+                    </td>
+                </tr>
             @endforeach
         </tbody>
     </table>
+    <div class="d-flex justify-content-center">
+        {{ $refuelings->links('pagination::bootstrap-5') }}
+    </div>
 @endsection

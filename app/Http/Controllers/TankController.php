@@ -18,21 +18,68 @@ class TankController extends Controller
         return view('tanks.create');
     }
 
+
+    public function calculateRemaining(Request $request, $id)
+    {
+        $tank = Tank::findOrFail($id);
+        $currentHeight = $request->input('current_height');
+
+        if ($tank->shape === 'rectangle') {
+            $remaining = $tank->length * $tank->width * $currentHeight * 1000;
+        } else {
+            $remaining = pow($tank->side, 2) * $currentHeight * 1000;
+        }
+
+        return response()->json(['remaining' => round($remaining, 2)]);
+    }
+
+    // public function store(Request $request)
+    // {
+    //     $request->validate([
+    //         'name' => 'required|string|unique:tanks,name',
+    //         'fuel_type' => 'required|string',
+    //         'total_capacity' => 'required|numeric|min:1',
+    //     ]);
+
+    //     $name = $request->input('name');
+    //     $fuel_type = $request->input('fuel_type');
+    //     $total_capacity = $request->input('total_capacity');
+
+    //     Tank::create([
+    //         'name' => $name,
+    //         'fuel_type' => $fuel_type,
+    //         'remaining_quantity' => $total_capacity,
+    //         'total_capacity' => $total_capacity,
+    //     ]);
+
+    //     return redirect()->route('tanks.index')->with('success', 'تمت إضافة الخزان بنجاح');
+    // }
+
+
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'name' => 'required|string|unique:tanks,name',
             'fuel_type' => 'required|string',
+            'capacity_method' => 'required|in:manual,calculate',
             'total_capacity' => 'required|numeric|min:1',
         ]);
 
-        $name = $request->input('name');
-        $fuel_type = $request->input('fuel_type');
-        $total_capacity = $request->input('total_capacity');
+        if ($request->capacity_method === 'calculate') {
+            if ($request->tank_shape === 'rectangle') {
+                $volume = $request->length * $request->width * $request->height_rect;
+            } else {
+                $volume = $request->side ** 2 * $request->height_square;
+            }
+            $total_capacity = $volume * 1000;
+        } else {
+            $total_capacity = $request->total_capacity;
+        }
 
         Tank::create([
-            'name' => $name,
-            'fuel_type' => $fuel_type,
+            'name' => $request->name,
+            'fuel_type' => $request->fuel_type,
             'remaining_quantity' => $total_capacity,
             'total_capacity' => $total_capacity,
         ]);
@@ -54,7 +101,7 @@ class TankController extends Controller
     public function update(Request $request, Tank $tank)
     {
         $request->validate([
-            'name' => 'string|unique:tanks,name,'.$tank->id,
+            'name' => 'string|unique:tanks,name,' . $tank->id,
             'fuel_type' => 'string',
             'total_capacity' => 'numeric|min:1',
         ]);

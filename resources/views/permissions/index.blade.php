@@ -1,16 +1,36 @@
-<x-admin-dash-layout>
-    <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Permission Management
-            </h2>
-            <a href="{{ route('permissions.create') }}" class="px-3 py-2 text-sm font-medium text-white bg-green-700 rounded-lg hover:bg-green-800">Add Permission</a>
-        </div>
-    </x-slot>
+@extends('layouts.app')
+
+@section('content')
     @if(session('success'))
         <div class="mb-4 text-green-600">
             {{ session('success') }}
         </div>
     @endif
-    @livewire('permissions-table')
-</x-admin-dash-layout>
+    <div class="py-10" style="direction: rtl">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Permission</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($permissions as $permission)
+            <tr>
+                <td>{{ $permission->name }}</td>
+                <td>
+                    <div>
+                        <a href="{{ route('permissions.edit', ['permission' => $permission->id]) }}" class="btn btn-primary">Edit</a>
+                        <form method="POST" action="{{ route('permissions.destroy', $permission->id) }}" onsubmit="return confirm('Are you sure?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+</div>
+@endsection

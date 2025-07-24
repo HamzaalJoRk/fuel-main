@@ -12,7 +12,11 @@
         </div>
         <div class="mb-3">
             <label>نوع الوقود</label>
-            <input type="text" name="fuel_type" class="form-control" value="{{ $tank->fuel_type }}" required>
+            <!-- <input type="text" name="fuel_type" class="form-control" value="{{ $tank->fuel_type }}" required> -->
+            <select name="fuel_type" id="car_id" class="form-control">
+                <option value="بنزين">بنزين</option>
+                <option value="مازوت">مازوت</option>
+            </select>
         </div>
         <!-- <div class="mb-3">
             <label>المتبقي</label>

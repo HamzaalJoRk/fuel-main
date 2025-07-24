@@ -4,7 +4,8 @@
     <h2>✏️ تعديل عملية التعبئة</h2>
 
     <form action="{{ route('refuelings.update', $refueling->id) }}" method="POST">
-        @csrf @method('PUT')
+        @csrf
+        @method('PUT')
 
         <div class="mb-3">
             <label>السيارة</label>
@@ -16,6 +17,7 @@
                 @endforeach
             </select>
         </div>
+
         <div class="mb-3">
             <label>الخزان</label>
             <select name="tank_id" class="form-control" required>
@@ -26,14 +28,18 @@
                 @endforeach
             </select>
         </div>
+
         <div class="mb-3">
             <label>الكمية المعبأة</label>
-            <input type="number" name="quantity" class="form-control" value="{{ $refueling->quantity }}" required>
+            <input type="number" name="filled_quantity" class="form-control" value="{{ $refueling->filled_quantity }}"
+                required>
         </div>
+
         <div class="mb-3">
             <label>التاريخ</label>
             <input type="date" name="date" class="form-control" value="{{ $refueling->date }}" required>
         </div>
+
         <button type="submit" class="btn btn-success">تحديث</button>
     </form>
 @endsection

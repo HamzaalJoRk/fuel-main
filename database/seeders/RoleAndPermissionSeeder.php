@@ -6,78 +6,67 @@ use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class RoleAndPermissionSeeder extends Seeder
 {
     public function run(): void
     {
-         //Reset cached roles and permissions
-         app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
-        Permission::create(['name' => 'create-users']);
-        Permission::create(['name' => 'edit-users']);
-        Permission::create(['name' => 'delete-users']);
+        app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
 
-        Permission::create(['name' => 'create-articles']);
-        Permission::create(['name' => 'edit-articles']);
-        Permission::create(['name' => 'delete-articles']);
+        $permissions = [
+            'اضافة مستخدم',
+            'تعديل مستخدم',
+            'حذف مستخدم',
+            'عرض مستخدم',
+            
+            'اضافة تعبئة وقود',
+            'تعديل تعبئة وقود',
+            'حذف تعبئة وقود',
+            'عرض تعبئة وقود',
+            
+            'اضافة سائق',
+            'تعديل سائق',
+            'حذف سائق',
+            'عرض سائق',
+            
+            'اضافة قسم',
+            'تعديل قسم',
+            'حذف قسم',
+            'عرض قسم',
+            
+            'اضافة ماركة سيارة',
+            'تعديل ماركة سيارة',
+            'حذف ماركة سيارة',
+            'عرض ماركة سيارة',
+            
+            'اضافة سيارة',
+            'تعديل سيارة',
+            'حذف سيارة',
+            'عرض سيارة',
+            
+            'اضافة خزان',
+            'تعديل خزان',
+            'حذف خزان',
+            'عرض خزان',
+            
+            'اضافة صلاحية',
+            'تعديل صلاحية',
+            'حذف صلاحية',
+            'عرض صلاحية',
+        ];
 
-        Permission::create(['name' => 'create-product']);
-        Permission::create(['name' => 'list-product']);
-        Permission::create(['name' => 'edit-product']);
-        Permission::create(['name' => 'delete-product']);
-       
-        $adminRole = Role::create(['name' => 'Admin']);
-        $editorRole = Role::create(['name' => 'Editor']);
-        $productmanagerRole = Role::create(['name' => 'ProductManager']);
+        foreach ($permissions as $permission) {
+            Permission::updateOrCreate(['name' => $permission]);
+        }
 
-        $adminRole->givePermissionTo([
-            'create-users',
-            'edit-users',
-            'delete-users',
-            'create-articles',
-            'edit-articles',
-            'delete-articles',
-            'create-product',
-            'list-product',
-            'edit-product',
-            'delete-product',
+        $superAdminRole = Role::updateOrCreate(['name' => 'Super Admin']);
+        $superAdminRole->givePermissionTo($permissions);
 
-        ]);
-
-        $editorRole->givePermissionTo([
-            'create-articles',
-            'edit-articles',
-            'delete-articles',
-        ]);
-
-        $productmanagerRole->givePermissionTo([
-            'create-product',
-            'list-product',
-            'edit-product',
-            'delete-product',
-        ]);
-          // create demo users
-        $user = \App\Models\User::factory()->create([
-            'name' => 'Ed Editor',
-            'email' => 'editor@example.com',
-            'password' => Hash::make('password')
-        ]);
-        $user->assignRole($editorRole);
-
-        $user = \App\Models\User::factory()->create([
-            'name' => 'Andrew Admin',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('password')
-        ]);
-
-        $user->assignRole($adminRole);
-
-        $user = \App\Models\User::factory()->create([
-            'name' => 'Peter Product',
-            'email' => 'product@example.com',
-            'password' => Hash::make('password')
-        ]);
-        
-        $user->assignRole($productmanagerRole);
+        $superAdmin = User::updateOrCreate(
+            ['email' => 'admin@example.com'],
+            ['name' => 'Super Admin', 'password' => Hash::make('password')]
+        );
+        $superAdmin->assignRole($superAdminRole);
     }
 }
